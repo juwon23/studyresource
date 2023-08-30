@@ -1,0 +1,28 @@
+DHCP(Dynamic Host Configuration Protocol)
+호스트가 지정된 IP주소를 갖는 것이 아니라 PC가 부팅될 때 DHCP서버에게 동적인 방식(자동 배정)으로 IP 주소를 하나씩 받아오는 방식
+임대서비스기에 사용 기간 설정 가능
+DHCP는 시간을 통제할 수 있기 때문에 중요
+
+설정
+
+ip dhcp pool cisco
+(DHCP로 사용된 주소의 영역 지정)
+network 192.168.x.x 255.255.255.0
+DHCP로 할당할 IP 주소 대역 지정
+default-router 192.168.0.254
+호스트가 내부에서 목적지를 찾지 못했을 때 갈 수 있는 Router의 이더넷 인터페이스의 IP주소
+exit
+conf t 모드로 나가기
+ip dhcp excluded-address 192.168.0.254
+DHCP로 할당할 IP 주소중 할당하지 말아야 할 IP 주소 지정(exception)
+
++)
+dns-server x.x.x.x
+DNS 서버를 지정
+
+domain-name ~~~~
+도메인 이름을 설정
+lease infinite
+배정시간 설정 (0~365 입력 가능한데 무한하게 설정할땐 infinite) 단위는 일
+
+show ip dhcp binding 이랑 show ip dhcp sever statistics로 확인 가능

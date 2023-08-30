@@ -1,0 +1,46 @@
+rip = 굳이 경로를 정해주지 않아도 패킷이 최단 경로로 알아서 길 찾는 것 (유식하게 Metric을 Hop-count로 사용 최대 Hop-count는 15)
+(경로지정을 몇개 잘 해놓으면 선이 좀 끊겨도 잘 감) 유식하게 말하면 이중화
+
+rip의 단점
+성능 말고 무조건 최단거리로만 이동 (오히려 자료의 양이 커지면 느리게 전송될 수 있음)
+Hop-count가 15까지 밖에 안되기에 대형 네트워크 사용 불가
+
+EIGRP 
+Cisco전용 라우팅 프로토콜(Cisco 제품이 아니면 호환 X)
+
+AS(Autonomous System)단위로 구성
+AS는 한명(한 조직)이 관리하는 Router의 집단
+AD값은 90
+멀티캐스트 주소를 이용하여 정보를 전달
+
+설정이 rip보다 복잡
+
+설정
+router eigrp <AS-Number>
+network <Network-Number> <Wildcard mask>
+no auto-summary
+
+OSPF
+EIGRP를 제외한 것들의 Link-state 라우팅 프로토콜
+Metric은 cost를 사용(성능이 좋은것들 우선)
+AD값은 110
+OSPF 단위는 Area(지역별로)
+Convergence time이 빠름
+
+설정이 rip보다 복잡
+
+설정
+router ospf<process-ID>(똑같이 할 필요는 없지만 똑같이 해야 좀...)
+router-id x.x.x.x
+network <Network-Number> <Wildcard mask> area값
+
+
+ACS(Accesss Control Lists)
+특정 트래픽의 접근을 허용할지 차단할지 결정하는 리스트 (보안 하려고)
+ACS 종류
+standard Access list : Source address(어디서 왔는지)만 참조해서 필터 여부 결정
+extended Access list : Source address 뿐만 아니라 destination address(어디갈지), protocol, Port번호 등 좀 더 자세한 정보를 참조해서 필터 여부 결정(성능 높음)
+
+Standard Access list는 보통 막을때 많이씀 (NAT에서 많이 씀)
+설정
+config창에서 access-list <list-number>{permit|dent} source [mask]

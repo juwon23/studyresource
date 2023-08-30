@@ -1,0 +1,23 @@
+VLAN(Virtual LAN) == Subnet
+
+VLAN은 보안설정(ACL,필터링)이 용이.
+브로드캐스트 트래픽 분산이 편함
+
+VTP(VLAN Trunking Protocol) 설정
+-VTP Domain
+-VTP Mode
+
+VLAN 만들기
+VLAN ID
+VLAN Name
+
+스위치 포트 설정
+Trunk Port
+Access Port
+
+라우터 Sub interface 설정
+interface_name.x
+
+VLAN 100 : 192.168.1.0 /24
+VLAN 200 : 192.168.2.0 /24
+VLAN 300 : 192.168.3.0 /24
